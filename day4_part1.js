@@ -20,8 +20,7 @@ for (let card of splitFile) {
     //    console.log(ourNumbers,winN);
     if (ourNumbers.includes(winN)) {
       exponent === null ? (exponent = 0) : (exponent += 1);
-      //      console.log("match!",exp
-      onent)
+      //      console.log("match!",exponent)
     }
   }
   if (exponent !== null) {
