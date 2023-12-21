@@ -1,8 +1,6 @@
 import { readFileSync } from "fs";
 import { posix } from "path";
 
-// 1. step: check backwards
-
 function cleanUp(arr) {
   arr.pop();
   arr.pop();
@@ -17,8 +15,8 @@ function cleanUp(arr) {
 
 function generalMapper(startValue, mappers) {
   for (let mapper of mappers) {
-    if (startValue >= mapper[0] && startValue < mapper[0] + mapper[2]) {
-      return startValue - (mapper[0] - mapper[1]);
+    if (startValue >= mapper[1] && startValue < mapper[1] + mapper[2]) {
+      return startValue + (mapper[0] - mapper[1]);
     }
   }
   return startValue;
@@ -33,12 +31,9 @@ for (let map of splitFile) {
 }
 
 const seeds = rawMaps[1][0].trim().split(" ");
-const newSeeds = [];
-console.log(seeds);
-for (let y = 0; y < seeds.length; y = y + 2) {
-  newSeeds.push([Number(seeds[y]), Number(seeds[y]) + Number(seeds[y + 1])]);
+for (let y = 0; y < seeds.length; y++) {
+  seeds[y] = Number(seeds[y]);
 }
-console.log(newSeeds);
 const seedtosoil = rawMaps[2];
 cleanUp(seedtosoil);
 const soiltofert = rawMaps[3];
@@ -60,31 +55,20 @@ for (let x = 0; x < humidtoloc.length; x++) {
   }
 }
 
-let found = false;
+var seedLocations = [];
 
-for (let x = 0; x < 1000000000; x++) {
-  let seed = x;
-  seed = generalMapper(seed, humidtoloc);
-  seed = generalMapper(seed, temptohumid);
-  seed = generalMapper(seed, lighttotemp);
-  seed = generalMapper(seed, watertolight);
-  seed = generalMapper(seed, ferttowater);
-  seed = generalMapper(seed, soiltofert);
-  seed = generalMapper(seed, seedtosoil);
-  if (x % 1000000 === 0) {
-    //   console.log(x, seed);
-  }
-  for (let seedrange of newSeeds) {
-    if (seed > seedrange[0] && seed < seedrange[1]) {
-      console.log(x, seed);
-      found = true;
-      break;
-    }
-  }
-  if (found) {
-    break;
-  }
+for (let seed of seeds) {
+  let newValue = generalMapper(seed, seedtosoil);
+  newValue = generalMapper(newValue, soiltofert);
+  newValue = generalMapper(newValue, ferttowater);
+  newValue = generalMapper(newValue, watertolight);
+  newValue = generalMapper(newValue, lighttotemp);
+  newValue = generalMapper(newValue, temptohumid);
+  newValue = generalMapper(newValue, humidtoloc);
+  seedLocations.push(newValue);
 }
+
+console.log(Math.min(...seedLocations));
 
 // let sumOfEarnings = 0;
 
