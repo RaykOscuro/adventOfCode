@@ -51,11 +51,16 @@ for (let x = 0; x < currentLoc.length; x++) {
 }
 
 console.log(multis);
-let result = 1;
-for (const x of multis) {
-  result = result * x;
+
+for (let x=0; x<multis.length-1; x++) {
+  const addA=multis[x];
+  const addB=multis[x+1];
+  while (multis[x]!==multis[x+1]){
+    multis[x]<multis[x+1]?multis[x]=multis[x]+addA:multis[x+1]=multis[x+1]+addB;
+  }
+  console.log(multis);
 }
-console.log(result);
+
 // while (!escaped(currentLoc)) {
 //   steps++;
 //   for (let x = 0; x < currentLoc.length; x++) {
