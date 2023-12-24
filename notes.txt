@@ -1,26 +1,27 @@
-starter 0 repeats at: 18961
-starter: 1 z at: 9804
-starter: 1 z at: 21973
-starter: 1 z at: 34142
-starter: 1 z at: 46311
-starter: 1 z at: 58480
-starter: 1 z at: 70649
-starter: 1 z at: 82818
-starter: 1 z at: 94987
-
-9804
-12169
-12169
-
-18961x
-12169x+9804
-17263x+3477
-13301x+5640
-
-14999
-29998
-14999
+FF7FSF7F7F7F7F7F---7
+L|LJ||||||||||||F--J
+FL-7LJLJ||||||LJL-77
+F--JF--7||LJLJIF7FJ-f~~jf~~/IIljljIf/fj-
+L---JF-JLJIIIIFJLJJ7
+|F|F-JF---7IIIL7L|7|
+|FFJF7L7F-JF7IIL---7
+7-L-JL7||F7|L7F-7F7|
+L.L7LFJ|||||FJL7||LJ
+L7JLJL-JLJLJL--JLJ.L
 
 
-16697x+2891
 
+.Il~/.f~jI.
+.
+
+.I..I.I..I.
+.
+
+.I..I.I..I.
+.
+
+.I..I.I..I.
+.
+
+.I..I.I..I.
+.
