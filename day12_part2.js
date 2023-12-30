@@ -77,9 +77,10 @@ function arrayConstructor(cArr, cBS, prevS) {
   return score;
 }
 
-let score = 0;
-for (let x = 0; x < springMap.length; x++) {
-  score += arrayConstructor(springMap[x], brokenSprings[x], "");
-  console.log(x);
-}
-console.log(score);
+// let score = 0;
+// for (let x = 0; x < springMap.length; x++) {
+//   score += arrayConstructor(springMap[x], brokenSprings[x], "");
+//   console.log(x);
+// }
+// console.log(score);
+
