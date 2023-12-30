@@ -1,6 +1,4 @@
 import { readFileSync } from "fs";
-import { get } from "http";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay12.txt", "utf-8");
 const springData = file.split("\r\n").map((x) => x.split(" "));
@@ -44,11 +42,7 @@ function arrayConstructor(cArr, cBS, prevS) {
   let tmpString = "";
   if (cArr[0] === "?" && cBS.length > 0) {
     if (fits(cArr, cBS[0]) && prevS !== "#") {
-      score += arrayConstructor(
-        cArr.slice(cBS[0]),
-        cBS.slice(1),
-        "#"
-      );
+      score += arrayConstructor(cArr.slice(cBS[0]), cBS.slice(1), "#");
     }
     //     if (prevS === "#") {
     //       arrayConstructor(mArr, cBS, ".");
@@ -60,11 +54,7 @@ function arrayConstructor(cArr, cBS, prevS) {
 
   if (cArr[0] === "#" && cBS.length > 0) {
     if (fits(cArr, cBS[0])) {
-      score += arrayConstructor(
-        cArr.slice(cBS[0]),
-        cBS.slice(1),
-        "#"
-      );
+      score += arrayConstructor(cArr.slice(cBS[0]), cBS.slice(1), "#");
     }
   }
   if (cArr[0] === "." && cBS.length > 0) {
@@ -83,4 +73,3 @@ function arrayConstructor(cArr, cBS, prevS) {
 //   console.log(x);
 // }
 // console.log(score);
-

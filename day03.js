@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay3.txt", "utf-8");
 

@@ -1,6 +1,4 @@
 import { readFileSync } from "fs";
-import { get } from "http";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay10.txt", "utf-8");
 const pipeArray = file.split("\r\n").map((x) => x.split(""));

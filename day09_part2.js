@@ -1,6 +1,4 @@
 import { readFileSync } from "fs";
-import { get } from "http";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay9.txt", "utf-8");
 const splitFile = file.split("\r\n");

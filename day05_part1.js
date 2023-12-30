@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { posix } from "path";
 
 function cleanUp(arr) {
   arr.pop();

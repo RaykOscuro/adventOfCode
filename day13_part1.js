@@ -1,6 +1,4 @@
 import { readFileSync } from "fs";
-import { get } from "http";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay13.txt", "utf-8");
 const mirrorData = file.split("\r\n\r\n").map((x) => x.split("\r\n"));
@@ -38,7 +36,7 @@ function findMirror(mMap) {
       //console.log(mMap.slice(0, y + 1), "Yay!");
       if (confirmMirror(mMap.slice(0, y + 1))) {
         //console.log("Yay!", (y+1)/2);
-        return ((y+1) / 2);
+        return (y + 1) / 2;
       }
     }
   }
@@ -67,11 +65,11 @@ function confirmMirror(mMap) {
   return true;
 }
 
-let score=0;
+let score = 0;
 for (let mappy of mirrorData) {
-  score +=100*findMirror(mappy);
-  if (findMirror(mappy)===0) {
-    score+=findMirror(transposer(mappy));
+  score += 100 * findMirror(mappy);
+  if (findMirror(mappy) === 0) {
+    score += findMirror(transposer(mappy));
   }
 }
 

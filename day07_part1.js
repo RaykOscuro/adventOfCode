@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { posix } from "path";
 
 const fiveOAK = [];
 const fourOAK = [];

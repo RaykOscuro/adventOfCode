@@ -1,6 +1,4 @@
 import { readFileSync } from "fs";
-import { get } from "http";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay13.txt", "utf-8");
 const mirrorData = file.split("\r\n\r\n").map((x) => x.split("\r\n"));
@@ -41,7 +39,7 @@ function findMirror(mMap) {
         return (y + 1) / 2;
       }
     }
-    if (mMap[0]=== mMap[y]) {
+    if (mMap[0] === mMap[y]) {
       console.log("MaybeI @", y, mMap.slice(1, y));
       //console.log(y, "maybe mirror!");
       //console.log(mMap.slice(0, y + 1), "Yay!");

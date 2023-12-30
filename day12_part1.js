@@ -1,6 +1,4 @@
 import { readFileSync } from "fs";
-import { get } from "http";
-import { posix } from "path";
 
 const file = readFileSync("./inputDataDay12.txt", "utf-8");
 const springData = file.split("\r\n").map((x) => x.split(" "));
@@ -12,7 +10,7 @@ for (let dat of springData) {
   springMap.push([...dat[0]]);
   dat[1] = dat[1].split(",");
   for (let x of dat[1]) {
-    helper.push(Number(x))
+    helper.push(Number(x));
   }
   brokenSprings.push(helper);
 }
@@ -35,7 +33,7 @@ function fits(cArr, len) {
 }
 
 function arrayConstructor(cArr, cBS, prevS, bArr) {
-//  console.log(cArr, bArr, cBS);
+  //  console.log(cArr, bArr, cBS);
   let score = 0;
   let tmpString = "";
   if (cArr[0] === "?" && cBS.length > 0) {

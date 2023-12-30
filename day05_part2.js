@@ -1,5 +1,4 @@
 import { readFileSync } from "fs";
-import { posix } from "path";
 
 // 1. step: check backwards
 
