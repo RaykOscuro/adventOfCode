@@ -28,10 +28,6 @@ for (let row = 0; row < gridData.length; row++) {
       [Infinity, Infinity, Infinity, Infinity],
       [Infinity, Infinity, Infinity, Infinity],
       [Infinity, Infinity, Infinity, Infinity],
-      [Infinity, Infinity, Infinity, Infinity],
-      [Infinity, Infinity, Infinity, Infinity],
-      [Infinity, Infinity, Infinity, Infinity],
-      [Infinity, Infinity, Infinity, Infinity],
     ]);
   }
 }
@@ -41,15 +37,12 @@ for (let row = 0; row < gridData.length; row++) {
 const currDir = [R, D];
 const currStep = [0, 0];
 const currPos = [
-  [0, 4],
-  [4, 0],
+  [0, 1],
+  [1, 0],
 ];
-const currLoss = [
-  gridData[0][1] + gridData[0][2] + gridData[0][3] + gridData[0][4],
-  gridData[1][0] + gridData[2][0] + gridData[3][0] + gridData[4][0],
-];
-visitData[0][4][0][R] = currLoss[0];
-visitData[4][0][0][D] = currLoss[1];
+const currLoss = [gridData[0][1], gridData[1][0]];
+visitData[0][1][0][R] = gridData[0][1];
+visitData[1][0][0][D] = gridData[1][0];
 
 // find the final spot
 
@@ -57,7 +50,7 @@ const finalCoord = [gridData.length - 1, gridData[0].length - 1];
 
 // keep track of the best (lowest) score so far
 
-let bestLoss = 6000;
+let bestLoss = Infinity;
 
 // function to check if potential new location is out of bounds
 
@@ -77,7 +70,7 @@ function isOOB(pos) {
 function finalBranch(step, dir, pos, loss) {
   if (pos[0] === finalCoord[0] && pos[1] === finalCoord[1]) {
     bestLoss = loss;
-    console.log(bestLoss);
+    //        console.log(bestLoss);
   } else {
     addNext(step, dir, pos, loss);
   }
@@ -90,7 +83,7 @@ function addNext(step, dir, pos, loss) {
   currDir.push(dir);
   currPos.push(pos);
   currLoss.push(loss);
-  for (let x = step; x < 7; x++) {
+  for (let x = step; x < 3; x++) {
     visitData[pos[0]][pos[1]][x][dir] = loss;
   }
 }
@@ -107,12 +100,12 @@ while (currPos.length > 0) {
   // calculate possible next Positions
   const onward = [pos[0] + directions[dir][0], pos[1] + directions[dir][1]];
   const right = [
-    pos[0] + 4 * directions[rightTurn[dir]][0],
-    pos[1] + 4 * directions[rightTurn[dir]][1],
+    pos[0] + directions[rightTurn[dir]][0],
+    pos[1] + directions[rightTurn[dir]][1],
   ];
   const left = [
-    pos[0] + 4 * directions[leftTurn[dir]][0],
-    pos[1] + 4 * directions[leftTurn[dir]][1],
+    pos[0] + directions[leftTurn[dir]][0],
+    pos[1] + directions[leftTurn[dir]][1],
   ];
 
   // calculate future heat loss
@@ -122,28 +115,16 @@ while (currPos.length > 0) {
   }
   let rightLoss = Infinity;
   if (!isOOB(right)) {
-    rightLoss = loss;
-    for (let x = 1; x < 5; x++) {
-      rightLoss +=
-        gridData[pos[0] + x * directions[rightTurn[dir]][0]][
-          pos[1] + x * directions[rightTurn[dir]][1]
-        ];
-    }
+    rightLoss = loss + gridData[right[0]][right[1]];
   }
   let leftLoss = Infinity;
   if (!isOOB(left)) {
-    leftLoss = loss;
-    for (let x = 1; x < 5; x++) {
-      leftLoss +=
-        gridData[pos[0] + x * directions[leftTurn[dir]][0]][
-          pos[1] + x * directions[leftTurn[dir]][1]
-        ];
-    }
+    leftLoss = loss + gridData[left[0]][left[1]];
   }
 
   // calculate new Data
   if (
-    step < 6 &&
+    step < 2 &&
     onwardLoss < bestLoss &&
     !(visitData[onward[0]][onward[1]][step + 1][dir] <= onwardLoss)
   ) {

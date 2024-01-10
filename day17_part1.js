@@ -85,10 +85,10 @@ while (currPos.length > 0) {
         )
       ) {
         if (onward[0] === finalCoord[0] && onward[1] === finalCoord[1]) {
-          console.log(loss + gridData[onward[0]][onward[1]]);
+          //console.log(loss + gridData[onward[0]][onward[1]]);
           if (loss + gridData[onward[0]][onward[1]] < bestLoss) {
             bestLoss = loss + gridData[onward[0]][onward[1]];
-            console.log(bestLoss);
+            //console.log(bestLoss);
           }
         } else {
           currStep.push(step + 1);
@@ -112,10 +112,10 @@ while (currPos.length > 0) {
         )
       ) {
         if (right[0] === finalCoord[0] && right[1] === finalCoord[1]) {
-          console.log(loss + gridData[right[0]][right[1]]);
+          //console.log(loss + gridData[right[0]][right[1]]);
           if (loss + gridData[right[0]][right[1]] < bestLoss) {
             bestLoss = loss + gridData[right[0]][right[1]];
-            console.log(bestLoss);
+            //console.log(bestLoss);
           }
         } else {
           currStep.push(1);
@@ -139,10 +139,10 @@ while (currPos.length > 0) {
         )
       ) {
         if (left[0] === finalCoord[0] && left[1] === finalCoord[1]) {
-          console.log(loss + gridData[left[0]][left[1]]);
+          //console.log(loss + gridData[left[0]][left[1]]);
           if (loss + gridData[left[0]][left[1]] < bestLoss) {
             bestLoss = loss + gridData[left[0]][left[1]];
-            console.log(bestLoss);
+            //console.log(bestLoss);
           }
         } else {
           currStep.push(1);
