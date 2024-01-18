@@ -17,63 +17,45 @@ const L = 1;
 const D = 2;
 const U = 3;
 
-const right = digData.filter((data) => data[0] === "R");
-const left = digData.filter((data) => data[0] === "L");
-const up = digData.filter((data) => data[0] === "U");
-const down = digData.filter((data) => data[0] === "D");
-let rightSum = 0;
-let leftSum = 0;
-let upSum = 0;
-let downSum = 0;
-
-for (let x of right) {
-  rightSum += Number(x[1]);
-}
-for (let x of left) {
-  leftSum += Number(x[1]);
-}
-for (let x of up) {
-  upSum += Number(x[1]);
-}
-for (let x of down) {
-  downSum += Number(x[1]);
-}
-
-console.log(rightSum, leftSum, upSum, downSum);
 const digGrid = [];
 const rows = [];
 
-for (let x = 0; x < rightSum + 1 + leftSum; x++) {
+for (let x = 0; x < 1000; x++) {
   digGrid.push([]);
-  for (let y = 0; y < upSum + 1 + downSum; y++) {
+  for (let y = 0; y < 1000; y++) {
     digGrid[x].push([]);
   }
 }
+
+let leftSum=500
+let upSum=500
 
 let currPos = [leftSum, upSum];
 
 console.log(digData);
 
 for (let instr of digData) {
+  let currDirEnc = instr[2].slice(7, -1);
   let currDir;
   //console.log(instr[0]);
-  switch (instr[0]) {
-    case "R":
+  switch (currDirEnc) {
+    case 0:
       currDir = R;
       break;
-    case "L":
-      currDir = L;
-      break;
-    case "U":
-      currDir = U;
-      break;
-    case "D":
+    case 1:
       currDir = D;
       break;
+    case 2:
+      currDir = L;
+      break;
+    case 3:
+      currDir = U;
+      break;
   }
-  let currDist = instr[1];
-  let currColor = instr[2].slice(2, -2);
-  console.log(currColor,parseInt(currColor,16));
+  let currDistEnc = instr[2].slice(2, -2);
+  let currDist = parseInt(currDistEnc, 16);
+  //console.log(currPos, currDir);
+  console.log(currPos);
   for (let x = 1; x <= currDist; x++) {
     digGrid[currPos[0] + x * directions[currDir][0]][
       currPos[1] + x * directions[currDir][1]
@@ -203,6 +185,6 @@ for (let x = 0; x < digGrid.length; x++) {
 console.log(digGrid[0]);
 console.log(room);
 console.log(digGrid[leftSum][upSum]);
-console.log(digGrid[leftSum][upSum+1]);
-console.log(digGrid[leftSum][upSum+2]);
-console.log(digGrid[leftSum][upSum+3]);
+console.log(digGrid[leftSum][upSum + 1]);
+console.log(digGrid[leftSum][upSum + 2]);
+console.log(digGrid[leftSum][upSum + 3]);

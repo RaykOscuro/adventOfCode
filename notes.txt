@@ -1,41 +1,54 @@
-157575
-563219
-235837
-245738
-346463
+L+U -> \
+L+D -> F
+R+U -> J
+R+D -> 7
+U+L -> 7
+U+R -> F
+D+L -> J
+D+R -> \
 
-[infinity,infinity,infinity,infinity],[infinity,infinity,infinity,infinity],[infinity,infinity,infinity,infinity]
+FR7 FRRR7
+U D U F7D
+U \RJ D\J
+\LLLLLJ
 
-< best
- ____
-v^...v^
-v^...v^
-v^...v^
-__...__
+F+\ -> no change
+F+J -> change
+7+\ -> change
+7+J -> no change
 
+URR URRRR
+U D U LUD
+U DRR DLD
+LLLLLLD
 
-[ 3 ], [ 3 ], [ 1 ], [],  [],   [ 3 ],  [ 3 ], [ 1 ], [],  []
+R 2 (#70c710)
+D 2 (#70c710)
+R 2 (#70c710)
+U 2 (#70c710)
+R 4 (#70c710)
+D 2 (#70c710)
+L 1 (#70c710)
+U 1 (#70c710)
+L 1 (#70c710)
+D 2 (#70c710)
+L 6 (#70c710)
+U 3 (#70c710)
 
-RRRRRRR
-#.....D
-###...D
-..#...D
-..#...D
-###.#LD
-#...#..
-##..###
-.#....#
-.######
+r400 u300 r200 d600 l600 u300
+    urr 
+    u d
+    u d
+urrrr d
+u     d
+u     d
+lllllld
 
-6811199
-  000
+r405 u300 r200 d600 l605 u300
 
-0   0
-6   6
-14  8
-24  10
-34  10
-43  9
-52  9
-61  9
-61  0
+406 + 406*300
+
+----,
+|   |_
+|
+|___
