@@ -52,3 +52,13 @@ r405 u300 r200 d600 l605 u300
 |   |_
 |
 |___
+
+3797 4051 3847 3877
+
+.o.o.o.o.o.o.o.o
+o.o.o.o.o.o.o.o.
+
+o.o.o.o.o.o.o.o.
+.o.o.o.o.o.o.o.o
+
+CHECK IF STATE WAS REACHED BEFORE
