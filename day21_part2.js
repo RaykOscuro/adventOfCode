@@ -1,3 +1,13 @@
+// what do we know?
+// - tree-like structure -> each node has up to 3 children, except root (has 4)
+//   - nodes can have more than one parent (that's horrible)
+// - overlap between activated nodes is an issue
+// - "inside" is gonna get filled out eventually, outer perimeter matters most
+// - we might have to label and keep track of "field repetitions" and link nodes to fields
+// - only outmost "layer" of nodes matters -> activated once? done!
+// - no rock scenario: 1²->2²->3²->...->25.000.000²
+// - investigate exact map-repetition behaviour
+
 import { readFileSync } from "fs";
 
 const file = readFileSync("./inputDataDay21.txt", "utf-8");
