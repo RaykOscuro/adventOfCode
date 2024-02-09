@@ -30,13 +30,39 @@ brickData.sort(sortBricks);
 const fallenBricks = [];
 const blockedArea = [];
 
+function findFallPotential(currentBrick) {
+  for (let ind = 0; ind < fallenBricks.length; ind++) {
+    const currentBrick = fallenBricks[ind];
+    const siblingBricks = fallenBricks.filter(
+      (brick) =>
+        brick[1].Z === currentBrick[1].Z &&
+        (brick[0], brick[1]) !== (currentBrick[0], currentBrick[1])
+    );
+    let compareBricks = fallenBricks.filter(
+      (brick) => brick[0].Z === currentBrick[1].Z + 1
+    );
+    compareBricks = compareBricks.filter((brick) =>
+      overlap(getSpace(brick), getSpace(currentBrick))
+    );
+    for (let siblingBrick of siblingBricks) {
+      compareBricks = compareBricks.filter(
+        (brick) => !overlap(getSpace(brick), getSpace(siblingBrick))
+      );
+    }
+    fallPotential += compareBricks.length;
+    for (let brick of compareBricks) {
+      findFallPotential(brick);
+    }
+  }
+  return fallPotential;
+}
+
 function fall(brick) {
   let z = blockedArea.length + 1;
   const brickSpace = [];
   const brickHeight =
     Number(brick[1].split(",").slice(-1)[0]) -
     Number(brick[0].split(",").slice(-1)[0]);
-  // console.log(brickHeight);
   for (
     let x = Number(brick[0].split(",").slice(0, 1)[0]);
     x <= Number(brick[1].split(",").slice(0, 1)[0]);
@@ -51,8 +77,6 @@ function fall(brick) {
     }
   }
 
-  // console.log(blockedArea);
-
   let newLayer = brickHeight + 1;
 
   for (let layer = blockedArea.length - 1; layer >= 0; layer--) {
@@ -60,7 +84,6 @@ function fall(brick) {
     for (let oldBrick of blockedArea[layer]) {
       if (overlap(brickSpace, oldBrick)) {
         done = true;
-        // console.log(brickSpace, oldBrick, "overlap!");
         break;
       }
       if (done) {
@@ -78,9 +101,8 @@ function fall(brick) {
     blockedArea.push([]);
     newLayer--;
   }
-  // console.log("Z: ", z, " Blocked Area: ", blockedArea);
+
   for (let x = 0; x <= brickHeight; x++) {
-    // console.log(x);
     blockedArea[Math.ceil(z - 1 + x, 0)].push(brickSpace);
   }
   fallenBricks.push([
@@ -109,35 +131,42 @@ function overlap(brickA, brickB) {
   return testSet.size !== brickA.length + brickB.length;
 }
 
-console.log(fallenBricks);
-for (let x of blockedArea) {
-  console.log(x);
-}
+let fallPotential = 0;
+const restingOn = [];
 
-let disintegratable = 0;
-
-for (let ind = 0; ind < fallenBricks.length; ind++) {
+for (let ind = fallenBricks.length - 1; ind >= 0; ind--) {
   const currentBrick = fallenBricks[ind];
-  const siblingBricks = fallenBricks.filter(
-    (brick) =>
-      brick[1].Z === currentBrick[1].Z &&
-      (brick[0], brick[1]) !== (currentBrick[0], currentBrick[1])
+
+  const compareBricks = [];
+
+  let lowerBricks = fallenBricks.filter(
+    (brick) => brick[1].Z === currentBrick[0].Z - 1
   );
-  let compareBricks = fallenBricks.filter(
-    (brick) => brick[0].Z === currentBrick[1].Z + 1
-  );
-  compareBricks = compareBricks.filter((brick) =>
+
+  lowerBricks = lowerBricks.filter((brick) =>
     overlap(getSpace(brick), getSpace(currentBrick))
   );
-  for (let siblingBrick of siblingBricks) {
-    compareBricks = compareBricks.filter(
-      (brick) => !overlap(getSpace(brick), getSpace(siblingBrick))
-    );
+
+  const tempRest = [];
+
+  for (let brick of lowerBricks) {
+    tempRest.push(brick);
   }
-  if (compareBricks.length === 0) {
-    disintegratable++;
-    console.log("found! ", currentBrick);
+
+  compareBricks.push(fallenBricks[ind]);
+
+  for (let x = 0; x < restingOn.length; x++) {
+    if (
+      restingOn[x].length !== 0 &&
+      restingOn[x].filter((onePillar) => !compareBricks.includes(onePillar))
+        .length === 0
+    ) {
+      compareBricks.push(fallenBricks[x + ind + 1]);
+      fallPotential++;
+    }
   }
+
+  restingOn.unshift(tempRest);
 }
 
-console.log(disintegratable);
+console.log(fallPotential);
